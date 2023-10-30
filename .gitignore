@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+
+# python virtual environment
+.venv
+.ipynb_checkpoints
+__pycache__/
