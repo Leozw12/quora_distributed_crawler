@@ -1,0 +1,21 @@
+{
+	"sec-ch-ua": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"",
+	"sec-ch-ua-mobile": "?0",
+	"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+	"content-type": "application/json",
+	"quora-page-creation-time": "1699449946230898",
+	"quora-revision": "a4036a937a422c174c6e1c0d44483e15f19fab88",
+	"quora-broadcast-id": "main-w-chan60-8888-react_gqdcxcrnikdfumri-qMjE",
+	"quora-formkey": "30448ffe40b90d6d9ed3ea23ac752cca",
+	"quora-canary-revision": "false",
+	"quora-window-id": "react_gqdcxcrnikdfumri",
+	"sec-ch-ua-platform": "\"Windows\"",
+	"accept": "*/*",
+	"origin": "https://www.quora.com",
+	"sec-fetch-site": "same-origin",
+	"sec-fetch-mode": "cors",
+	"sec-fetch-dest": "empty",
+	"referer": "https://www.quora.com/search?q=hello&type=question",
+	"accept-encoding": "gzip, deflate, br",
+	"accept-language": "zh-CN,zh;q=0.9"
+}
