@@ -82,6 +82,7 @@ def get(keyword: str, cursor: str = '-1'):
         if response.status_code == 404:
             continue
         if response.json()['data']['searchConnection'] is None:
+            print(f'\rkeyword: {keyword} | data null', flush=True)
             return 'data null'
         break
 
@@ -113,7 +114,7 @@ def get(keyword: str, cursor: str = '-1'):
         # 分页结束
         if not data['searchConnection']['pageInfo']['hasNextPage']:
             break
-
+    print()
     return result
 
 

@@ -85,7 +85,7 @@ def get(qid: int | str, cursor: str = '-1'):
         'answers': []
     }
 
-    progress = tqdm(desc='任务' + str(qid) + '进行中', leave=False)
+    progress = tqdm(desc='任务' + str(qid) + '进行中')
 
     while True:
         response = session.post('https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery', headers=headers,
