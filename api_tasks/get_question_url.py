@@ -10,11 +10,13 @@ from utils.upload import upload
 def run(keyword: str):
     res = get(keyword)
     path = f'./results/[{keyword}]results.txt'
+    os.makedirs('./results', exist_ok=True)
     if res != 'data null':
         with open(path, 'w', encoding='utf-8') as f:
             f.write(res)
         upload(path)
         os.remove(path)
+    print('Upload results ok')
 
 
 def get(keyword: str, cursor: str = '-1'):
