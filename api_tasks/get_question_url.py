@@ -1,10 +1,22 @@
 import time
+import os
 import random
 from utils.request_util import session
-from main import app
+from main_api import app
+from utils.upload import upload
 
 
 @app.task
+def run(keyword: str):
+    res = get(keyword)
+    path = f'./results/[{keyword}]results.txt'
+    if res != 'data null':
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(res)
+        upload(path)
+        os.remove(path)
+
+
 def get(keyword: str, cursor: str = '-1'):
     """
     Get question id and link
@@ -64,24 +76,34 @@ def get(keyword: str, cursor: str = '-1'):
     )
 
     # 检查是否有数据
-    response = session.post('https://www.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery', headers=headers,
-                            json=payload)
-    if response.json()['data']['searchConnection'] is None:
-        return 'data null'
+    while True:
+        response = session.post('https://www.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery', headers=headers,
+                                json=payload)
+        if response.status_code == 404:
+            continue
+        if response.json()['data']['searchConnection'] is None:
+            return 'data null'
+        break
+
+    result = ''
 
     while True:
         response = session.post('https://www.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery', headers=headers,
                                 json=payload)
-
-        if (response.status_code == 404) or (response.json()['data']['searchConnection'] is None):
-            time.sleep(random.randint(5, 8))
+        try:
+            if (response.status_code != 200) or (response.json()['data']['searchConnection'] is None):
+                # print(response.json()['data']['searchConnection'])
+                time.sleep(random.randint(5, 8))
+                continue
+        except:
             continue
 
         data = response.json()['data']
 
-        with open(f'../results/[{keyword}]results.txt', 'a', encoding='utf-8') as f:
-            for edge in data['searchConnection']['edges']:
-                f.write(f'{edge["node"]["question"]["qid"]} {edge["node"]["question"]["url"]}\n')
+        # with open(f'../results/[{keyword}]results.txt', 'a', encoding='utf-8') as f:
+        for edge in data['searchConnection']['edges']:
+            # f.write(f'{edge["node"]["question"]["qid"]} {edge["node"]["question"]["url"]}\n')
+            result += f'{edge["node"]["question"]["qid"]} {edge["node"]["question"]["url"]}\n'
 
         cursor = data['searchConnection']['pageInfo']['endCursor']
         payload['variables']['after'] = cursor
@@ -92,8 +114,8 @@ def get(keyword: str, cursor: str = '-1'):
         if not data['searchConnection']['pageInfo']['hasNextPage']:
             break
 
-    return {'keyword': keyword, 'end_cursor': cursor}
+    return result
 
 
 if __name__ == '__main__':
-    print(get('hello'))
+    get('first')

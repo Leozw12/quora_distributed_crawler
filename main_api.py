@@ -6,7 +6,7 @@ from pathlib import Path
 from celery import Celery
 from utils import check_connect
 
-app = Celery('quora-distributed-crawl', include=['api-tasks.get_answers', 'api-tasks.get_question_url'])
+app = Celery('quora-distributed-crawl', include=['api_tasks.get_answers', 'api_tasks.get_question_url'])
 app.config_from_object('config')
 
 if __name__ == '__main__':
@@ -23,4 +23,4 @@ if __name__ == '__main__':
     else:
         print('Can connect to www.quora.com.')
 
-    app.start(['-A', 'main-api', 'worker', '--loglevel=info'])
+    app.start(['-A', 'main_api', 'worker', '--loglevel=info'])

@@ -10,7 +10,7 @@ from selenium.webdriver import Chrome, ChromeOptions
 from utils import check_port, check_connect
 
 
-app = Celery('quora-distributed-crawl', include=['tasks.get_answers', 'tasks.get_question_url', 'tasks.demo'])
+app = Celery('quora-distributed-crawl', include=['tasks.get_answers', 'tasks.get_question_url'])
 app.config_from_object('config')
 
 

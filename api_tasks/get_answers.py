@@ -1,10 +1,23 @@
+import os
 import time
 from main import app
 from utils.request_util import session
 from tqdm import tqdm
 
+from utils.upload import upload
+
 
 @app.task
+def run(keyword: str):
+    res = get(keyword)
+    path = f'./results/[{keyword}]results.txt'
+    if res != 'data null':
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(res)
+        upload(path)
+        os.remove(path)
+
+
 def get(qid: int | str, cursor: str = '-1'):
     """
     Get question information and all answer.
