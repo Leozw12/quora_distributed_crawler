@@ -1,6 +1,9 @@
 import time
 import os
 import random
+
+import requests.exceptions
+
 from utils.request_util import session
 from main_api import app
 from utils.upload import upload
@@ -79,8 +82,15 @@ def get(keyword: str, cursor: str = '-1'):
 
     # 检查是否有数据
     while True:
-        response = session.post('https://www.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery', headers=headers,
-                                json=payload)
+        try:
+            response = session.post('https://www.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery',
+                                    headers=headers,
+                                    json=payload, timeout=5)
+        except requests.exceptions.Timeout:
+            print(f'\rkeyword: {keyword} | requests timeout', flush=True)
+            time.sleep(3)
+            continue
+
         if response.status_code == 404:
             continue
         if response.json()['data']['searchConnection'] is None:
@@ -91,8 +101,16 @@ def get(keyword: str, cursor: str = '-1'):
     result = ''
 
     while True:
-        response = session.post('https://www.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery', headers=headers,
-                                json=payload)
+        try:
+            response = session.post('https://www.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery',
+                                    headers=headers,
+                                    json=payload,
+                                    timeout=5)
+        except requests.exceptions.Timeout:
+            print(f'\rkeyword: {keyword} | requests timeout', flush=True)
+            time.sleep(3)
+            continue
+
         try:
             if (response.status_code != 200) or (response.json()['data']['searchConnection'] is None):
                 # print(response.json()['data']['searchConnection'])

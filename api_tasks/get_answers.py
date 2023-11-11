@@ -3,6 +3,7 @@ import time
 from main import app
 from utils.request_util import session
 from tqdm import tqdm
+import requests.exceptions
 
 from utils.upload import upload
 
@@ -90,8 +91,15 @@ def get(qid: int | str, cursor: str = '-1'):
     progress = tqdm(desc='任务' + str(qid) + '进行中')
 
     while True:
-        response = session.post('https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery', headers=headers,
-                                json=payload)
+        try:
+            response = session.post('https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery',
+                                    headers=headers,
+                                    json=payload,
+                                    timeout=5)
+        except requests.exceptions.Timeout:
+            print(f'\rkeyword: {qid} | requests timeout', flush=True)
+            time.sleep(3)
+            continue
 
         if response.status_code == 404:
             time.sleep(3)
