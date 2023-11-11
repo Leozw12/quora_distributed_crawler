@@ -18,7 +18,7 @@ def run(keyword: str):
             f.write(res)
         upload(path)
         os.remove(path)
-    print('Upload results ok')
+    print(f'[{keyword}]Upload results ok')
 
 
 def get(qid: int | str, cursor: str = '-1'):
