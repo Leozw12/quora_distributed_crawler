@@ -8,3 +8,5 @@ BROKER_URL = 'redis://:123456@localhost:6379/0'
 CELERY_TIMEZONE = 'Asia/Shanghai'
 # 工作进程数
 CELERYD_CONCURRENCY = 1
+
+CELERYD_MAX_TASKS_PER_CHILD = 20
