@@ -13,3 +13,9 @@ CELERYD_MAX_TASKS_PER_CHILD = 20
 
 CELERY_REJECT_ON_WORKER_LOST = False
 CELERY_ACKS_LATE = True
+
+
+BROKER_TRANSPORT_OPTIONS = {
+    'socket_timeout': 10,          # 建立连接后的套接字超时
+    'socket_connect_timeout': 30   # 连接Redis服务器的超时
+}
