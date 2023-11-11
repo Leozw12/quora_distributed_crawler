@@ -7,7 +7,7 @@ from utils.request_util import session
 from tqdm import tqdm
 
 
-@app.task
+@app.task(acks_late=True)
 def get(qid: int | str, url: str, cursor: str = '-1'):
     """
     Get question information and all answer.

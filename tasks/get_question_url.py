@@ -6,7 +6,7 @@ from utils.request_util import session
 from main import app
 
 
-@app.task
+@app.task(acks_late=True)
 def get(keyword: str, cursor: str = '-1'):
     """
     Get question id and link
