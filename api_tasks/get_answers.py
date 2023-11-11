@@ -95,7 +95,7 @@ def get(qid: int | str, cursor: str = '-1'):
             response = session.post('https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery',
                                     headers=headers,
                                     json=payload,
-                                    timeout=5)
+                                    timeout=20)
         except requests.exceptions.Timeout:
             print(f'\rkeyword: {qid} | requests timeout', flush=True)
             time.sleep(3)

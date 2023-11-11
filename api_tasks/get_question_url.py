@@ -85,10 +85,10 @@ def get(keyword: str, cursor: str = '-1'):
         try:
             response = session.post('https://www.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery',
                                     headers=headers,
-                                    json=payload, timeout=5)
+                                    json=payload, timeout=20)
         except requests.exceptions.Timeout:
             print(f'\rkeyword: {keyword} | requests timeout', flush=True)
-            time.sleep(3)
+            time.sleep(10)
             continue
 
         if response.status_code == 404:
