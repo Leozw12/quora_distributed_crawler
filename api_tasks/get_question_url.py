@@ -91,11 +91,17 @@ def get(keyword: str, cursor: str = '-1'):
             time.sleep(10)
             continue
 
-        if response.status_code == 404:
+        if response.status_code != 200:
             continue
-        if response.json()['data']['searchConnection'] is None:
-            print(f'\rkeyword: {keyword} | data null', flush=True)
-            return 'data null'
+        try:
+            if response.json()['data']['searchConnection'] is None:
+                print(f'\rkeyword: {keyword} | data null', flush=True)
+                return 'data null'
+        except Exception as e:
+            print(e)
+            print(response.text)
+            print('InvalidJSONError')
+            continue
         break
 
     result = ''
@@ -106,7 +112,7 @@ def get(keyword: str, cursor: str = '-1'):
                                     headers=headers,
                                     json=payload,
                                     timeout=5)
-        except requests.exceptions.Timeout:
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
             print(f'\rkeyword: {keyword} | requests timeout', flush=True)
             time.sleep(3)
             continue
