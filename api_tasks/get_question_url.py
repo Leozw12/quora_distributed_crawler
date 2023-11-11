@@ -6,7 +6,7 @@ from main_api import app
 from utils.upload import upload
 
 
-@app.task
+@app.task(acks_late=True)
 def run(keyword: str):
     res = get(keyword)
     path = f'./results/[{keyword}]results.txt'
