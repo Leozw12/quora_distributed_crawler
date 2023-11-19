@@ -16,6 +16,6 @@ CELERY_ACKS_LATE = True
 
 
 BROKER_TRANSPORT_OPTIONS = {
-    'socket_timeout': 2000,          # 建立连接后的套接字超时
+    'socket_timeout': 300,          # 建立连接后的套接字超时
     'socket_connect_timeout': 30   # 连接Redis服务器的超时
 }
