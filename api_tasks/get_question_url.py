@@ -35,7 +35,7 @@ def get(keyword: str, cursor: str = '-1'):
         "sec-ch-ua-mobile": "?0",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
         "content-type": "application/json",
-        "quora-page-creation-time": "1699449946230898",
+        "quora-page-creation-time": "1699723419999227",
         "quora-revision": "a4036a937a422c174c6e1c0d44483e15f19fab88",
         "quora-broadcast-id": "main-w-chan60-8888-react_gqdcxcrnikdfumri-qMjE",
         "quora-formkey": "30448ffe40b90d6d9ed3ea23ac752cca",
@@ -100,7 +100,7 @@ def get(keyword: str, cursor: str = '-1'):
         except Exception as e:
             print(e)
             print(response.text)
-            print('InvalidJSONError')
+            print(f'[{keyword}] InvalidJSONError')
             continue
         break
 
