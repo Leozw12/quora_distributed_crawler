@@ -104,7 +104,7 @@ def get(qid: int | str, cursor: str = '-1'):
 
         if response.status_code != 200:
             print(f'[{qid}] status_code:{response.status_code}')
-            time.sleep(3)
+            time.sleep(7)
             continue
 
         try:
