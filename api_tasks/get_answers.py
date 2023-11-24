@@ -107,7 +107,11 @@ def get(qid: int | str, cursor: str = '-1'):
             time.sleep(3)
             continue
 
-        data = response.json()['data']
+        try:
+            data = response.json()['data']
+        except Exception as e:
+            print(f'[{qid}] InvalidJSONError')
+            continue
 
         # 添加问题信息
         if result['qid'] == 0:
