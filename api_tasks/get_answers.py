@@ -7,6 +7,7 @@ import requests.exceptions
 
 from utils.upload import upload
 import json
+import time
 
 
 @app.task(acks_late=True)
@@ -157,7 +158,7 @@ def get(qid: int | str, cursor: str = '-1'):
         # 分页结束
         if not data['contentObject']['logConnection']['pageInfo']['hasNextPage']:
             break
-
+        time.sleep(0.2)
     # print(json.dumps(result))
     return result
 
