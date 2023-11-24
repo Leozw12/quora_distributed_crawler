@@ -6,6 +6,7 @@ from tqdm import tqdm
 import requests.exceptions
 
 from utils.upload import upload
+import json
 
 
 @app.task(acks_late=True)
@@ -15,7 +16,7 @@ def run(keyword: str):
     os.makedirs('./results', exist_ok=True)
     if res != 'data null':
         with open(path, 'w', encoding='utf-8') as f:
-            f.write(res)
+            f.write(json.dumps(res))
         upload(path)
         os.remove(path)
     print(f'[{keyword}]Upload results ok')
@@ -160,4 +161,4 @@ def get(qid: int | str, cursor: str = '-1'):
 
 
 if __name__ == '__main__':
-    print(get(155166933))
+    print(run(155166933))
