@@ -102,12 +102,10 @@ def get(qid: int | str, cursor: str = '-1'):
             time.sleep(3)
             continue
 
-        if response.status_code == 404:
+        if response.status_code != 200:
+            print(f'[{qid}] status_code:{response.status_code}')
             time.sleep(3)
             continue
-
-        if response.status_code != 200:
-            break
 
         data = response.json()['data']
 
@@ -161,4 +159,4 @@ def get(qid: int | str, cursor: str = '-1'):
 
 
 if __name__ == '__main__':
-    print(run(155166933))
+    print(run(1010988))
