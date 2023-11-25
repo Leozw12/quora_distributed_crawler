@@ -1,6 +1,6 @@
 import os
 import time
-from main import app
+from main_api import app
 from utils.request_util import session
 from tqdm import tqdm
 import requests.exceptions
