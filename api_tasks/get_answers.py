@@ -136,8 +136,8 @@ def get(qid: int | str, cursor: str = '-1'):
                 if edge['node']['responsibleUser'] is not None:
                     answer['author'] = {
                         'uid': edge['node']['responsibleUser']['uid'],
-                        'givenName': edge['node']['responsibleUser']['names'][0]['givenName'],
-                        'familyName': edge['node']['responsibleUser']['names'][0]['familyName'],
+                        'givenName': edge['node']['responsibleUser']['names'][0]['givenName'] if len(edge['node']['responsibleUser']['names']) > 0 else '',
+                        'familyName': edge['node']['responsibleUser']['names'][0]['familyName']  if len(edge['node']['responsibleUser']['names']) > 0 else '',
                         'profileUrl': edge['node']['responsibleUser']['profileUrl']
                     }
                 result['answers'].append(answer)
