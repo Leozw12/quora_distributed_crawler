@@ -125,6 +125,8 @@ def get(qid: int | str, cursor: str = '-1'):
             result['viewCount'] = data['contentObject']['viewCount']
 
         for edge in data['contentObject']['logConnection']['edges']:
+            if edge['node']['__typename'] is None:
+                print(data)
             if edge['node']['__typename'] == 'AttachAnswerOperation' and not edge['node']['answer']['isDeleted']:
                 answer = {
                     'opid': edge['node']['opid'],
@@ -137,15 +139,15 @@ def get(qid: int | str, cursor: str = '-1'):
                     answer['author'] = {
                         'uid': edge['node']['responsibleUser']['uid'],
                         'givenName': edge['node']['responsibleUser']['names'][0]['givenName'] if len(edge['node']['responsibleUser']['names']) > 0 else '',
-                        'familyName': edge['node']['responsibleUser']['names'][0]['familyName']  if len(edge['node']['responsibleUser']['names']) > 0 else '',
+                        'familyName': edge['node']['responsibleUser']['names'][0]['familyName'] if len(edge['node']['responsibleUser']['names']) > 0 else '',
                         'profileUrl': edge['node']['responsibleUser']['profileUrl']
                     }
                 result['answers'].append(answer)
             elif edge['node']['__typename'] == 'AddQuestionOperation':
                 result['asker'] = {
                     'uid': edge['node']['responsibleUser']['uid'],
-                    'givenName': edge['node']['responsibleUser']['names'][0]['givenName'],
-                    'familyName': edge['node']['responsibleUser']['names'][0]['familyName'],
+                    'givenName': edge['node']['responsibleUser']['names'][0]['givenName'] if len(edge['node']['responsibleUser']['names']) > 0 else '',
+                    'familyName': edge['node']['responsibleUser']['names'][0]['familyName'] if len(edge['node']['responsibleUser']['names']) > 0 else '',
                     'profileUrl': edge['node']['responsibleUser']['profileUrl']
                 }
 
@@ -164,4 +166,4 @@ def get(qid: int | str, cursor: str = '-1'):
 
 
 if __name__ == '__main__':
-    print(run(1010988))
+    print(run(17056872))
