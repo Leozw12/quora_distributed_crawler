@@ -124,6 +124,8 @@ def get(qid: int | str, cursor: str = '-1'):
             result['isLocked'] = data['contentObject']['isLocked']
             result['viewCount'] = data['contentObject']['viewCount']
 
+        if data is None:
+            break
         for edge in data['contentObject']['logConnection']['edges']:
             if edge['node']['__typename'] is None:
                 print(data)
@@ -148,8 +150,7 @@ def get(qid: int | str, cursor: str = '-1'):
                     'uid': edge['node']['responsibleUser']['uid'],
                     'givenName': edge['node']['responsibleUser']['names'][0]['givenName'] if len(edge['node']['responsibleUser']['names']) > 0 else '',
                     'familyName': edge['node']['responsibleUser']['names'][0]['familyName'] if len(edge['node']['responsibleUser']['names']) > 0 else '',
-                    'profileUrl': edge['node']['responsibleUser']['profileUrl']
-                }
+                    'profileUrl': edge['node']['responsibleUser']['profileUrl']}
 
         # 切换分页最后指向
         end_cursor = data['contentObject']['logConnection']['pageInfo']['endCursor']
