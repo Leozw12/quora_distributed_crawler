@@ -126,9 +126,10 @@ def get(qid: int | str, cursor: str = '-1'):
 
         if data is None:
             break
+
         for edge in data['contentObject']['logConnection']['edges']:
-            if edge['node']['__typename'] is None:
-                print(data)
+            if edge['node'] is None:
+                continue
             if edge['node']['__typename'] == 'AttachAnswerOperation' and not edge['node']['answer']['isDeleted']:
                 answer = {
                     'opid': edge['node']['opid'],
@@ -167,4 +168,4 @@ def get(qid: int | str, cursor: str = '-1'):
 
 
 if __name__ == '__main__':
-    print(run(17056872))
+    print(run(23479622))
