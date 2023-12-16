@@ -1,0 +1,1103 @@
+{
+	"info": {
+		"_postman_id": "59115cf0-36ee-4dec-bcf9-0db1a69123a9",
+		"name": "https://www.quora.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24465756"
+	},
+	"item": [
+		{
+			"name": "MultifeedQuery",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+					},
+					{
+						"key": "DNT",
+						"value": "1"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Quora-Page-Creation-Time",
+						"value": "1698160475249493"
+					},
+					{
+						"key": "Quora-Revision",
+						"value": "9060cbdc12c8f23ce9154dad1eb38f0335a34f21"
+					},
+					{
+						"key": "Quora-Broadcast-Id",
+						"value": "main-w-chan51-8888-react_zjfqjwgglzmoyrxk-alRf",
+						"disabled": true
+					},
+					{
+						"key": "Quora-Formkey",
+						"value": "ee79e4a047e4b5abd21eb489c83da286"
+					},
+					{
+						"key": "Quora-Canary-Revision",
+						"value": "false"
+					},
+					{
+						"key": "Quora-Window-Id",
+						"value": "react_zjfqjwgglzmoyrxk",
+						"disabled": true
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-gpc",
+						"value": "1"
+					},
+					{
+						"key": "host",
+						"value": "www.quora.com"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queryName\": \"MultifeedQuery\",\r\n    \"variables\": {\r\n        \"first\": 10,\r\n        \"multifeedAfter\": \"5453769086025796746\",\r\n        \"multifeedNumBundlesOnClient\": 30,\r\n        \"injectionType\": null,\r\n        \"injectionData\": null,\r\n        \"filterStoryType\": null,\r\n        \"filterStoryOid\": null,\r\n        \"multifeedPage\": \"topic\",\r\n        \"pageData\": 788,\r\n        \"showLiveBanner\": false\r\n    },\r\n    \"extensions\": {\r\n        \"hash\": \"d1fb0002679e47e37ee25e83a290af7b4d0bd1079d18186542033a547611c065\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://www.quora.com/graphql/gql_para_POST?q=MultifeedQuery",
+					"protocol": "https",
+					"host": [
+						"www",
+						"quora",
+						"com"
+					],
+					"path": [
+						"graphql",
+						"gql_para_POST"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "MultifeedQuery"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TopicReadMultifeedLoggedIn_Query",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == '200'){\r",
+							"    var jd = pm.response.json();\r",
+							"    var v = jd.data.multifeedObject.multifeedConnection\r",
+							"    tests[\"Check edges\"] = v.edges.length != 1;\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+					},
+					{
+						"key": "DNT",
+						"value": "1"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.61"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Quora-Page-Creation-Time",
+						"value": "1698158282173647"
+					},
+					{
+						"key": "Quora-Revision",
+						"value": "9060cbdc12c8f23ce9154dad1eb38f0335a34f21",
+						"disabled": true
+					},
+					{
+						"key": "Quora-Broadcast-Id",
+						"value": "main-w-chan64-8888-react_mlaacmqoxqjevjiv-lM1D",
+						"disabled": true
+					},
+					{
+						"key": "Quora-Formkey",
+						"value": "ee79e4a047e4b5abd21eb489c83da286"
+					},
+					{
+						"key": "Quora-Canary-Revision",
+						"value": "false"
+					},
+					{
+						"key": "Quora-Window-Id",
+						"value": "react_mlaacmqoxqjevjiv",
+						"disabled": true
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-gpc",
+						"value": "1"
+					},
+					{
+						"key": "host",
+						"value": "www.quora.com"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queryName\": \"TopicReadMultifeedLoggedIn_Query\",\r\n    \"variables\": {\r\n        \"multifeedAfter\": \"\",\r\n        \"multifeedNumBundlesOnClient\": 0,\r\n        \"tid\": 788,\r\n        \"first\": 10\r\n    },\r\n    \"extensions\": {\r\n        \"hash\": \"59e5656965695734e747aa56d7871c8e0a353d24f01e414bee076e4e3ae1a902\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://www.quora.com/graphql/gql_para_POST?q=TopicReadMultifeedLoggedIn_Query",
+					"protocol": "https",
+					"host": [
+						"www",
+						"quora",
+						"com"
+					],
+					"path": [
+						"graphql",
+						"gql_para_POST"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "TopicReadMultifeedLoggedIn_Query"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchResultsListQuery",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Page-Creation-Time",
+						"value": "1698160475249493",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Quora-Revision",
+						"value": "ca6c252f65905b11b42144ebc3335fac257bbc53",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Quora-Broadcast-Id",
+						"value": "main-w-chan59-8888-react_gnyihxwioqqetsdm-6pwM",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Quora-Formkey",
+						"value": "ee79e4a047e4b5abd21eb489c83da286",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Canary-Revision",
+						"value": "false",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Quora-Window-Id",
+						"value": "react_gnyihxwioqqetsdm",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty",
+						"type": "text"
+					},
+					{
+						"key": "sec-gpc",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "host",
+						"value": "www.quora.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queryName\": \"SearchResultsListQuery\",\r\n    \"variables\": {\r\n        \"query\": \"0\",\r\n        \"disableSpellCheck\": null,\r\n        \"resultType\": \"question\",\r\n        \"author\": null,\r\n        \"time\": \"all_times\",\r\n        \"first\": 10,\r\n        \"after\": \"-1\",\r\n        \"tribeId\": null\r\n    },\r\n    \"extensions\": {\r\n        \"hash\": \"c3b33f29a4dec826b99b6efbfec5829ed39de2e3d39a65fd50810b646ab31a14\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery",
+					"protocol": "https",
+					"host": [
+						"www",
+						"quora",
+						"com"
+					],
+					"path": [
+						"graphql",
+						"gql_para_POST"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "SearchResultsListQuery"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ContentLogMainQuery",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Page-Creation-Time",
+						"value": "1701333684753282",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Revision",
+						"value": "45efaddc95875625cf250e7fffbbdeffc22b8856",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Broadcast-Id",
+						"value": "main-w-chan62-8888-react_ygjuidlykwvmsjaw-QGBb",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Formkey",
+						"value": "1326c11516d4886a37ef25d5612fc19b",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Canary-Revision",
+						"value": "false",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Window-Id",
+						"value": "react_ygjuidlykwvmsjaw",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty",
+						"type": "text"
+					},
+					{
+						"key": "sec-gpc",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "host",
+						"value": "www.quora.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queryName\": \"ContentLogMainQuery\",\r\n    \"variables\": {\r\n        \"entityType\": \"question\",\r\n        \"oid\": 1440872,\r\n        \"first\": 10,\r\n        \"after\": -1\r\n    },\r\n    \"extensions\": {\r\n        \"hash\": \"e0c32d4c157df432435d46288f218ca1aa271405e5f83175dc1fd0592eaf1058\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery",
+					"protocol": "https",
+					"host": [
+						"www",
+						"quora",
+						"com"
+					],
+					"path": [
+						"graphql",
+						"gql_para_POST"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "ContentLogMainQuery"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserProfile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Page-Creation-Time",
+						"value": "1701333684753282",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Revision",
+						"value": "45efaddc95875625cf250e7fffbbdeffc22b8856",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Broadcast-Id",
+						"value": "main-w-chan62-8888-react_ygjuidlykwvmsjaw-QGBb",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Formkey",
+						"value": "1326c11516d4886a37ef25d5612fc19b",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Canary-Revision",
+						"value": "false",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Window-Id",
+						"value": "react_ygjuidlykwvmsjaw",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty",
+						"type": "text"
+					},
+					{
+						"key": "sec-gpc",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "host",
+						"value": "www.quora.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queryName\": \"UserProfileCombinedListQuery\",\r\n    \"variables\": {\r\n        \"uid\": 2196921781033,\r\n        \"order\": 1,\r\n        \"first\": 3,\r\n        \"after\": \"2\"\r\n    },\r\n    \"extensions\": {\r\n        \"hash\": \"2db78826756ddf25b6fd683a624a1dea9e308b17b2e91926c987c91ffd7c8580\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://www.quora.com/graphql/gql_para_POST?q=UserProfileCombinedListQuery",
+					"protocol": "https",
+					"host": [
+						"www",
+						"quora",
+						"com"
+					],
+					"path": [
+						"graphql",
+						"gql_para_POST"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "UserProfileCombinedListQuery"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QuestionAnswerPagedListQuery",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Page-Creation-Time",
+						"value": "1701333684753282",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Revision",
+						"value": "45efaddc95875625cf250e7fffbbdeffc22b8856",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Broadcast-Id",
+						"value": "main-w-chan62-8888-react_ygjuidlykwvmsjaw-QGBb",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Formkey",
+						"value": "1326c11516d4886a37ef25d5612fc19b",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Canary-Revision",
+						"value": "false",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Window-Id",
+						"value": "react_ygjuidlykwvmsjaw",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty",
+						"type": "text"
+					},
+					{
+						"key": "sec-gpc",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "host",
+						"value": "www.quora.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queryName\": \"QuestionAnswerPagedListQuery\",\r\n    \"variables\": {\r\n        \"qid\": 138407239,\r\n        \"first\": 100,\r\n        \"after\": null,\r\n        \"forceScoreVersion\": \"hide_relevant_answers\"\r\n    },\r\n    \"extensions\": {\r\n        \"hash\": \"8b794eb4b0c433bea1403c056e5811082342dc4cc0843ba84a8c25452630875d\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://www.quora.com/graphql/gql_para_POST?q=QuestionAnswerPagedListQuery",
+					"protocol": "https",
+					"host": [
+						"www",
+						"quora",
+						"com"
+					],
+					"path": [
+						"graphql",
+						"gql_para_POST"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "QuestionAnswerPagedListQuery"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AllCommentsListQuery",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Page-Creation-Time",
+						"value": "1701333684753282",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Revision",
+						"value": "45efaddc95875625cf250e7fffbbdeffc22b8856",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Broadcast-Id",
+						"value": "main-w-chan62-8888-react_ygjuidlykwvmsjaw-QGBb",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Formkey",
+						"value": "1326c11516d4886a37ef25d5612fc19b",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Canary-Revision",
+						"value": "false",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Window-Id",
+						"value": "react_ygjuidlykwvmsjaw",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty",
+						"type": "text"
+					},
+					{
+						"key": "sec-gpc",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "host",
+						"value": "www.quora.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queryName\": \"AllCommentsListQuery\",\r\n    \"variables\": {\r\n        \"id\": \"QW5zd2VyQDA6MTQ3Nzc0MzY4OTU1ODU3Nw==\",\r\n        \"first\": 100,\r\n        \"after\": null\r\n    },\r\n    \"extensions\": {\r\n        \"hash\": \"7842e5b1f2eebdbf08ae89a7e29ec86d546f969e543a84f0c2683cfdd15eae96\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://www.quora.com/graphql/gql_para_POST?q=AllCommentsListQuery",
+					"protocol": "https",
+					"host": [
+						"www",
+						"quora",
+						"com"
+					],
+					"path": [
+						"graphql",
+						"gql_para_POST"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "AllCommentsListQuery"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CommentReplySwitcherQuery",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Page-Creation-Time",
+						"value": "1701333684753282",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Revision",
+						"value": "45efaddc95875625cf250e7fffbbdeffc22b8856",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Broadcast-Id",
+						"value": "main-w-chan62-8888-react_ygjuidlykwvmsjaw-QGBb",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Formkey",
+						"value": "1326c11516d4886a37ef25d5612fc19b",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Canary-Revision",
+						"value": "false",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Window-Id",
+						"value": "react_ygjuidlykwvmsjaw",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty",
+						"type": "text"
+					},
+					{
+						"key": "sec-gpc",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "host",
+						"value": "www.quora.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queryName\": \"CommentReplySwitcherQuery\",\r\n    \"variables\": {\r\n        \"commentId\": 116902081,\r\n        \"commentType\": \"answer_comment\",\r\n        \"requestType\": null\r\n    },\r\n    \"extensions\": {\r\n        \"hash\": \"9105c5a215cd0c06092a4b598766098846f94f09152acc3636b5600b87ee3e4c\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://www.quora.com/graphql/gql_para_POST?q=CommentReplySwitcherQuery",
+					"protocol": "https",
+					"host": [
+						"www",
+						"quora",
+						"com"
+					],
+					"path": [
+						"graphql",
+						"gql_para_POST"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "CommentReplySwitcherQuery"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CommentRepliesListQuery",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Page-Creation-Time",
+						"value": "1701333684753282",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Revision",
+						"value": "45efaddc95875625cf250e7fffbbdeffc22b8856",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Broadcast-Id",
+						"value": "main-w-chan62-8888-react_ygjuidlykwvmsjaw-QGBb",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Formkey",
+						"value": "1326c11516d4886a37ef25d5612fc19b",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Canary-Revision",
+						"value": "false",
+						"type": "text"
+					},
+					{
+						"key": "Quora-Window-Id",
+						"value": "react_ygjuidlykwvmsjaw",
+						"type": "text"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty",
+						"type": "text"
+					},
+					{
+						"key": "sec-gpc",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "host",
+						"value": "www.quora.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queryName\": \"CommentRepliesListQuery\",\r\n    \"variables\": {\r\n        \"commentId\": 116903191,\r\n        \"commentType\": \"answer_comment\",\r\n        \"requestType\": null,\r\n        \"first\": 100,\r\n        \"after\": null\r\n    },\r\n    \"extensions\": {\r\n        \"hash\": \"65b10f19a7c88a44065f9fce075df7078831c52d3e251fd35eceb8dd3ad950ac\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://www.quora.com/graphql/gql_para_POST?q=CommentRepliesListQuery",
+					"protocol": "https",
+					"host": [
+						"www",
+						"quora",
+						"com"
+					],
+					"path": [
+						"graphql",
+						"gql_para_POST"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "CommentRepliesListQuery"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
