@@ -118,7 +118,7 @@ def extract_comment(comment):
             'givenName': user['names'][0]['givenName'] if len(user['names']) > 0 else '',
             'familyName': user['names'][0]['familyName'] if len(user['names']) > 0 else ''
         },
-        'content': comment_node['contentQtextDocument']['legacyJson']
+        'content': comment_node['contentQtextDocument']['legacyJson'] if comment_node['contentQtextDocument'] is not None else '' 
     }
 
 
