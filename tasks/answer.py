@@ -37,8 +37,7 @@ def fetch_question_with_answer(qid: int) -> None:
         while True:
             response = fetch_answers_by_qid(session, qid, cursor)
 
-            data_connection = response.json(
-            )['data']['question']['pagedListDataConnection']
+            data_connection = response.json()['data']['question']['pagedListDataConnection']
 
             edges = data_connection['edges']
             for edge in edges:
@@ -54,15 +53,15 @@ def fetch_question_with_answer(qid: int) -> None:
                 if node_type == 'QuestionAnswerItem2':
                     answer = node['answer']
                     new_answer = extract_answer(answer)
+                    
                     # get answer comments
-                    new_answer.update(
-                        comments=get_all_comment(session, answer['id']))
+                    new_answer.update(comments=get_all_comment(session, answer['id']))
+                    
                     result['answers'].append(new_answer)
 
                     # get asker info
                     if result['asker'] == {}:
-                        result['asker'] = fetch_user_info_by_uid(
-                            session, answer['question']['asker']['uid'])
+                        result['asker'] = fetch_user_info_by_uid(session, answer['question']['asker']['uid'])
 
             if not data_connection['pageInfo']['hasNextPage']:
                 break
@@ -127,16 +126,14 @@ def get_all_reply(session, cid: int):
     cursor = None
     while True:
         response = fetch_reply_by_comment_id(session, cid, cursor)
-        replies_connection = response.json(
-        )['data']['comment']['repliesConnection']
+        replies_connection = response.json()['data']['comment']['repliesConnection']
 
         for edge in replies_connection['edges']:
             reply = extract_comment(edge)
 
             # Is there a next level reply?
             if len(edge['node']['repliesConnection']['edges']) > 0:
-                reply.update(comments=get_all_reply(
-                    session, edge['node']['commentId']))
+                reply.update(comments=get_all_reply(session, edge['node']['commentId']))
 
             replys.append(reply)
 
@@ -155,16 +152,14 @@ def get_all_comment(session, aid: str):
 
     while True:
         response = fetch_comments_by_aid(session, aid, cursor)
-        comments_connection = response.json(
-        )['data']['node']['allCommentsConnection']
+        comments_connection = response.json()['data']['node']['allCommentsConnection']
 
         for edge in comments_connection['edges']:
             comment = extract_comment(edge)
 
             # Is there a next level reply?
             if len(edge['node']['repliesConnection']['edges']) > 0:
-                comment.update(comments=get_all_reply(
-                    session, edge['node']['commentId']))
+                comment.update(comments=get_all_reply(session, edge['node']['commentId']))
 
             comments.append(comment)
 
