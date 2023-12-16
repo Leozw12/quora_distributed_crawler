@@ -1,11 +1,11 @@
 import traceback
 import requests
-from datetime import datetime
 from main import app
 from api.answer import fetch_answers_by_qid
 from api.question import fetch_question_info_by_qid
 from api.profile import fetch_user_info_by_uid
 from api.comment import fetch_comments_by_aid
+from utils.logging import log_to_file
 
 
 @app.task(acks_late=True)
@@ -68,10 +68,8 @@ def fetch_question_with_answer(qid: int) -> None:
             cursor = data_connection['pageInfo']['endCursor']
 
     except Exception as e:
-        # 记录异常堆栈到日志文件中
-        now = datetime.now()
-        with open(f'./{now.year}-{now.month}-{now.day}.log', 'a', encoding='utf-8') as out:
-            out.write(f'{qid} {response.text}\n' + traceback.format_exc() + '\n')
+        # Log the exception stack to the log file
+        log_to_file(f'{qid} {response.text}\n' + traceback.format_exc())
         raise
 
     # TODO: How should I save the results?
