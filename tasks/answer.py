@@ -5,6 +5,7 @@ from main import app
 from api.answer import fetch_answers_by_qid
 from api.question import fetch_question_info_by_qid
 from api.profile import fetch_user_info_by_uid
+from api.comment import fetch_comments_by_aid
 
 
 @app.task(acks_late=True)
@@ -51,7 +52,10 @@ def fetch_question_with_answer(qid: int) -> None:
                 # answer item
                 if node_type == 'QuestionAnswerItem2':
                     answer = node['answer']
-                    result['answers'].append(extract_answer(answer))
+                    new_answer = extract_answer(answer)
+                    # get answer comments
+                    new_answer.update(comments=get_all_comment(session, answer['id']))
+                    result['answers'].append(new_answer)
 
                     # get asker info
                     if result['asker'] == {}:
@@ -66,11 +70,46 @@ def fetch_question_with_answer(qid: int) -> None:
     except Exception as e:
         # 记录异常堆栈到日志文件中
         now = datetime.now()
-        with open(f'./logs/{now.year}-{now.month}-{now.day}.log', 'a', encoding='utf-8') as out:
+        with open(f'./{now.year}-{now.month}-{now.day}.log', 'a', encoding='utf-8') as out:
             out.write(f'{qid} {response.text}\n' + traceback.format_exc() + '\n')
         raise
 
+    # TODO: How should I save the results?
+
     return result
+
+
+def get_all_comment(session, aid: str):
+    comments = []
+    cursor = None
+
+    while True:
+        response = fetch_comments_by_aid(session, aid, cursor)
+        comments_connection = response.json()['data']['node']['allCommentsConnection']
+
+        for edge in comments_connection['edges']:
+            comment_node = edge['node']
+            user = comment_node['user']
+            comments.append({
+                'commentId': comment_node['commentId'],
+                'creationTime': comment_node['creationTime'],
+                'url': comment_node['url'],
+                'author': {
+                    'uid': user['uid'],
+                    'profileUrl': user['profileUrl'],
+                    'givenName': user['names'][0]['givenName'] if len(user['names']) > 0 else '',
+                    'familyName': user['names'][0]['familyName'] if len(user['names']) > 0 else ''
+                },
+                'content': comment_node['contentQtextDocument']['legacyJson']
+            })
+
+        if not comments_connection['pageInfo']['hasNextPage']:
+            break
+
+        # update next page cursor
+        cursor = comments_connection['pageInfo']['endCursor']
+
+    return comments
 
 
 def extract_answer(answer):
@@ -92,5 +131,6 @@ def extract_answer(answer):
         'numViews': answer['numViews'],
         'numUpvotes': answer['numUpvotes'],
         'numShares': answer['numShares'],
-        'numDisplayComments': answer['numDisplayComments'],
+        'numComments': answer['numDisplayComments'],
+        'comments': []
     }
