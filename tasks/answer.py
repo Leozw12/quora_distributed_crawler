@@ -30,12 +30,12 @@ def fetch_question_with_answer(self, qid: int) -> None:
         'answers': []
     }
 
-    # get question information
-    result.update(**fetch_question_info_by_qid(session, qid))
-
     cursor = None
 
     try:
+        # get question information
+        result.update(**fetch_question_info_by_qid(session, qid))
+
         while True:
             response = fetch_answers_by_qid(session, qid, cursor)
 
