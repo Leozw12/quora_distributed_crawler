@@ -8,11 +8,14 @@ from api.profile import fetch_user_info_by_uid
 from api.comment import fetch_comments_by_aid, fetch_reply_by_comment_id
 from utils.logging_util import log_to_file
 from utils.upload import upload
+from utils.session_util import build_session_with_retry
 
 
 @app.task(bind=True, acks_late=True)
 def fetch_question_with_answer(self, qid: int) -> None:
-    session: requests.Session = app.conf['session']
+    # session: requests.Session = app.conf['session']
+    # TODO: Temporary solution, because multiple processes share a session, resulting in the problem of slow request.
+    session: requests.Session = build_session_with_retry(backoff_factor=5)
 
     # output formatte
     result = {
