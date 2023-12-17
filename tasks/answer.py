@@ -36,6 +36,9 @@ def fetch_question_with_answer(self, qid: int) -> None:
         # get question information
         result.update(**fetch_question_info_by_qid(session, qid))
 
+        # get asker info
+        result['asker'] = fetch_user_info_by_uid(session, result['asker']['uid'])
+
         while True:
             response = fetch_answers_by_qid(session, qid, cursor)
 
@@ -65,10 +68,6 @@ def fetch_question_with_answer(self, qid: int) -> None:
                     new_answer.update(comments=get_all_comment(session, answer['id']))
                     
                     result['answers'].append(new_answer)
-
-                    # get asker info
-                    if result['asker'] == {}:
-                        result['asker'] = fetch_user_info_by_uid(session, answer['question']['asker']['uid'])
 
             if not data_connection['pageInfo']['hasNextPage']:
                 break
