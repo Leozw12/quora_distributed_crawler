@@ -121,4 +121,4 @@ async def upload_file(file: UploadFile = File(...)):
 
 if __name__ == '__main__':
     Path("./results/").mkdir(parents=True, exist_ok=True)
-    uvicorn.run(app="s:app", host='0.0.0.0', port=65534, reload=True)
+    uvicorn.run(app="main:app", host='0.0.0.0', port=65534, reload=True)
