@@ -32,5 +32,6 @@ def fetch_question_info_by_qid(session: requests.Session, qid: int):
         'followerCount': contentObject['followerCount'],
         'isLocked': contentObject['isLocked'],
         'isTrendyQuestion': contentObject['isTrendyQuestion'],
-        'creationTime': contentObject['creationTime']
+        'creationTime': contentObject['creationTime'],
+        'asker': {'uid': contentObject['asker']['uid']}
     }
