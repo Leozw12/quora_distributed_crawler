@@ -15,7 +15,7 @@ from utils.session_util import build_session_with_retry
 def fetch_question_with_answer(self, qid: int) -> None:
     # session: requests.Session = app.conf['session']
     # TODO: Temporary solution, because multiple processes share a session, resulting in the problem of slow request.
-    session: requests.Session = build_session_with_retry(backoff_factor=5)
+    session: requests.Session = build_session_with_retry()
 
     # output formatte
     result = {
@@ -86,6 +86,8 @@ def fetch_question_with_answer(self, qid: int) -> None:
         exchange = self.request.delivery_info['exchange']
         self.app.send_task(self.name, queue=routing_key, exchange=exchange, reject_on_worker_lost=True)
         raise
+    finally:
+        session.close()
 
     # upload result
     try:
