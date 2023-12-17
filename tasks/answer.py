@@ -5,11 +5,12 @@ from api.answer import fetch_answers_by_qid
 from api.question import fetch_question_info_by_qid
 from api.profile import fetch_user_info_by_uid
 from api.comment import fetch_comments_by_aid, fetch_reply_by_comment_id
-from utils.logging import log_to_file
+from utils.logging_util import log_to_file
+from utils.upload import upload
 
 
-@app.task(acks_late=True)
-def fetch_question_with_answer(qid: int) -> None:
+@app.task(bind=True, acks_late=True)
+def fetch_question_with_answer(self, qid: int) -> None:
     session: requests.Session = app.conf['session']
 
     # output formatte
@@ -74,9 +75,17 @@ def fetch_question_with_answer(qid: int) -> None:
         log_to_file(f'{qid} {response.text}\n' + traceback.format_exc())
         raise
 
-    # TODO: How should I save the results?
+    # upload result
+    try:
+        upload(result)
+    except requests.HTTPError as e:
+        # back task
+        routing_key = self.request.delivery_info['routing_key']
+        exchange = self.request.delivery_info['exchange']
+        self.app.send_task(self.name, queue=routing_key, exchange=exchange, reject_on_worker_lost=True)
+        raise
 
-    return result
+    return None
 
 
 def extract_answer(answer):
