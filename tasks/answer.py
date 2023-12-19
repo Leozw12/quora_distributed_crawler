@@ -46,8 +46,7 @@ def fetch_question_with_answer(self, qid: int) -> None:
             response = fetch_answers_by_qid(session, qid, cursor)
 
             if response.json()['data']['question'] is None:
-                time.sleep(3)
-                print('fetch_question_with_answer - qid - cursor - is None')
+                time.sleep(2)
                 continue
 
             data_connection = response.json()['data']['question']['pagedListDataConnection']
@@ -151,8 +150,7 @@ def get_all_reply(session, cid: int):
         response = fetch_reply_by_comment_id(session, cid, cursor)
 
         if response.json()['data']['comment'] is None:
-            time.sleep(3)
-            print('get_all_reply - cid - cursor - is None')
+            time.sleep(2)
             continue
 
         replies_connection = response.json()['data']['comment']['repliesConnection']
@@ -183,8 +181,7 @@ def get_all_comment(session, aid: str):
         response = fetch_comments_by_aid(session, aid, cursor)
 
         if response.json()['data']['node'] is None:
-            time.sleep(3)
-            print('get_all_comment - aid - cursor - is None')
+            time.sleep(2)
             continue
 
         comments_connection = response.json()['data']['node']['allCommentsConnection']
