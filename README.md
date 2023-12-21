@@ -36,3 +36,11 @@ Please refer to [celery doc](https://docs.celeryq.dev/en/stable/userguide/callin
 ```
 python main.py
 ```
+### Start worker by android
+Download ZeroTermux https://github.com/hanxinhao000/ZeroTermux/releases
+```
+pkg update && pkg upgrade
+pkg install python3
+```
+Then [Installation](#installation) > [Configuration worker](#configuration-worker) > [Start worker](#start-worker)
+
