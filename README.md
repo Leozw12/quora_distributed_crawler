@@ -1,5 +1,5 @@
 # quora_distributed_crawler 
-This project is a distributed web crawler specifically designed for scraping data from Quora.com.
+This project is a distributed web crawler, which is specially developed for crawling data from Quora.com.
 
 ## Getting Started
 ### Prerequisites
