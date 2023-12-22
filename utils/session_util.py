@@ -3,7 +3,7 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
 
-def build_session_with_retry(retries=7, backoff_factor=1.5, status_forcelist=(403, 404, 429, 500, 502, 503, 504), session=None):
+def build_session_with_retry(retries=5, backoff_factor=1.5, status_forcelist=(403, 404, 429, 500, 502, 503, 504), session=None):
     """构建具有重试机制的请求会话
     
     Args:
