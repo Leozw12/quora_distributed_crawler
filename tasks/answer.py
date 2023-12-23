@@ -77,7 +77,7 @@ def fetch_question_with_answer(self, qid: int) -> None:
             # update next page cursor
             cursor = data_connection['pageInfo']['endCursor']
 
-            time.sleep(0.3)
+            time.sleep(2)
 
     except Exception as e:
         # Log the exception stack to the log file
@@ -170,7 +170,7 @@ def get_all_reply(session, cid: int):
         # update next page cursor
         cursor = replies_connection['pageInfo']['endCursor']
 
-        time.sleep(0.3)
+        time.sleep(2)
 
     return replys
 
@@ -203,6 +203,6 @@ def get_all_comment(session, aid: str):
         # update next page cursor
         cursor = comments_connection['pageInfo']['endCursor']
         
-        time.sleep(0.3)
+        time.sleep(2)
 
     return comments
