@@ -23,3 +23,5 @@ task_reject_on_worker_lost = True
 task_acks_late = True
 
 worker_hijack_root_logger = False
+
+worker_cancel_long_running_tasks_on_connection_loss = True
