@@ -3,7 +3,8 @@ This project is a distributed web crawler, which is specially developed for craw
 
 ## Getting Started
 ### Prerequisites
-Server message queuing middleware, using rabbitmq or redis.
+Server message queuing middleware, using rabbitmq or redis.<br>
+Using virtual environments is **not recommended**, as it makes the task impossible.
 | Dependency | Version        |
 |------------|----------------|
 | Python     | 3.11 or higher |
