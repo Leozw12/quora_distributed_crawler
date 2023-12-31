@@ -46,7 +46,7 @@ def fetch_question_with_answer(self, qid: int) -> None:
             response = fetch_answers_by_qid(session, qid, cursor)
 
             if response.json()['data']['question'] is None:
-                time.sleep(2)
+                time.sleep(1)
                 continue
 
             data_connection = response.json()['data']['question']['pagedListDataConnection']
@@ -66,18 +66,19 @@ def fetch_question_with_answer(self, qid: int) -> None:
                     answer = node['answer']
                     new_answer = extract_answer(answer)
                     
-                    # get answer comments
-                    new_answer.update(comments=get_all_comment(session, answer['id']))
+                    if new_answer["numComments"] > 0:
+                        # get answer comments
+                        new_answer.update(comments=get_all_comment(session, answer['id']))
                     
                     result['answers'].append(new_answer)
+
+            time.sleep(1)
 
             if not data_connection['pageInfo']['hasNextPage']:
                 break
 
             # update next page cursor
             cursor = data_connection['pageInfo']['endCursor']
-
-            time.sleep(2)
 
     except Exception as e:
         # Log the exception stack to the log file
@@ -150,7 +151,7 @@ def get_all_reply(session, cid: int):
         response = fetch_reply_by_comment_id(session, cid, cursor)
 
         if response.json()['data']['comment'] is None:
-            time.sleep(2)
+            time.sleep(1)
             continue
 
         replies_connection = response.json()['data']['comment']['repliesConnection']
@@ -164,13 +165,13 @@ def get_all_reply(session, cid: int):
 
             replys.append(reply)
 
+        time.sleep(1)
+
         if not replies_connection['pageInfo']['hasNextPage']:
             break
 
         # update next page cursor
         cursor = replies_connection['pageInfo']['endCursor']
-
-        time.sleep(2)
 
     return replys
 
@@ -183,7 +184,7 @@ def get_all_comment(session, aid: str):
         response = fetch_comments_by_aid(session, aid, cursor)
 
         if response.json()['data']['node'] is None:
-            time.sleep(2)
+            time.sleep(1)
             continue
 
         comments_connection = response.json()['data']['node']['allCommentsConnection']
@@ -197,12 +198,12 @@ def get_all_comment(session, aid: str):
 
             comments.append(comment)
 
+        time.sleep(1)
+
         if not comments_connection['pageInfo']['hasNextPage']:
             break
 
         # update next page cursor
         cursor = comments_connection['pageInfo']['endCursor']
-        
-        time.sleep(2)
 
     return comments
