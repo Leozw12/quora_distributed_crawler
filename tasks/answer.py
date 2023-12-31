@@ -84,9 +84,7 @@ def fetch_question_with_answer(self, qid: int) -> None:
         # Log the exception stack to the log file
         log_to_file(f'{qid}\n' + traceback.format_exc())
         # back task
-        routing_key = self.request.delivery_info['routing_key']
-        exchange = self.request.delivery_info['exchange']
-        self.app.send_task(self.name, queue=routing_key, exchange=exchange, reject_on_worker_lost=True)
+        back_queue(self)
         raise
 
     # upload result
@@ -94,12 +92,20 @@ def fetch_question_with_answer(self, qid: int) -> None:
         upload(result)
     except requests.HTTPError as e:
         # back task
-        routing_key = self.request.delivery_info['routing_key']
-        exchange = self.request.delivery_info['exchange']
-        self.app.send_task(self.name, queue=routing_key, exchange=exchange, reject_on_worker_lost=True)
+        back_queue(self)
         raise
 
     return qid
+
+
+def back_queue(celery_instance):
+    """Back task to the queue."""
+    routing_key = celery_instance.request.delivery_info['routing_key']
+    exchange = celery_instance.request.delivery_info['exchange']
+    args = celery_instance.request.args
+    kwargs = celery_instance.request.kwargs
+    new_task = celery_instance.app.send_task(celery_instance.name, args=args, kwargs=kwargs, exchange=exchange, queue=routing_key, reject_on_worker_lost=True)
+    print(f'[{celery_instance.request.id}]: ERROR || NEW-TASK-ID:{new_task}')
 
 
 def extract_answer(answer):
