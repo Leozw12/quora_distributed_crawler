@@ -1,5 +1,5 @@
 import json
-from session_util import build_session_with_retry
+from .session_util import build_session_with_retry
 
 
 url = "http://localhost:65534/upload"
