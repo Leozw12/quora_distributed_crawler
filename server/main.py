@@ -30,11 +30,8 @@ class Question(BaseModel):
 
 def get_directory_size_fast(directory):
     """Get directory size using system command for faster performance."""
-    try:
-        result = subprocess.check_output(['du', '-s', directory])
-        return int(result.split()[0].decode('utf-8')) * 1024  # du returns size in kilobytes
-    except Exception as e:
-        return str(e)
+    result = subprocess.check_output("find " + directory + " -type f -exec ls -l {} + | awk '{total += $5} END {print total}'", shell=True)
+    return int(result)
 
 
 def convert_bytes(byte_size):
@@ -52,13 +49,9 @@ def convert_bytes(byte_size):
 
 def count_small_files(directory, max_size_kb):
     """Count files smaller than a certain size using the 'find' command."""
-    try:
-        # Constructing the find command
-        command = ['find', directory, '-type', 'f', '-size', f'-{max_size_kb}k', '|', 'wc', '-l']
-        result = subprocess.check_output(' '.join(command), shell=True)
-        return int(result.strip())
-    except Exception as e:
-        return str(e)
+    command = f"find {directory} -type f -size -{max_size_kb}k | wc -l"
+    result = subprocess.check_output(command, shell=True, text=True)
+    return int(result.strip())
 
 
 @app.post("/upload")
@@ -94,7 +87,7 @@ async def get_complete_list():
 async def get_info():
     """Get information about the current state of the server."""
     completion_num = len(await get_complete_list())
-    less_than_1kb = count_small_files('./results', 1)
+    less_than_1kb = count_small_files('./results', 2)
     less_than_1kb_ratio = less_than_1kb / completion_num
 
     return {
