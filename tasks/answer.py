@@ -80,7 +80,7 @@ def fetch_question_with_answer(self, qid: int) -> None:
             # update next page cursor
             cursor = data_connection['pageInfo']['endCursor']
 
-    except Exception as e:
+    except requests.exceptions.RetryError as e:
         # Log the exception stack to the log file
         log_to_file(f'{qid}\n' + traceback.format_exc())
         # back task
