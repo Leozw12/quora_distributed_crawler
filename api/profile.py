@@ -26,7 +26,7 @@ def fetch_user_info_by_uid(session: requests.Session, uid: int):
 
     return {
         'uid': uid,
-        'givenName': user['names'][0]['givenName'] if len(user['names']) > 0 else '',
-        'familyName': user['names'][0]['familyName'] if len(user['names']) > 0 else '',
+        'givenName': user['names'][0]['givenName'] if len(user.get('names', [])) > 0 else '',
+        'familyName': user['names'][0]['familyName'] if len(user.get('names', [])) > 0 else '',
         'isMachineAnswerBot': user['isMachineAnswerBot'],
     }

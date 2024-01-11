@@ -116,8 +116,8 @@ def extract_answer(answer):
         'content': answer['content'],
         'author': {
             'uid': answer['author']['uid'],
-            'givenName': answer['author']['names'][0]['givenName'] if len(answer['author']['names']) > 0 else '',
-            'familyName': answer['author']['names'][0]['familyName'] if len(answer['author']['names']) > 0 else '',
+            'givenName': answer['author']['names'][0]['givenName'] if len(answer['author'].get('names', [])) > 0 else '',
+            'familyName': answer['author']['names'][0]['familyName'] if len(answer['author'].get('names', [])) > 0 else '',
             'isMachineAnswerBot': answer['author']['isMachineAnswerBot'],
             'profileUrl': answer['author']['profileUrl']
         },
@@ -143,8 +143,8 @@ def extract_comment(comment):
         'author': {
             'uid': user['uid'],
             'profileUrl': user['profileUrl'],
-            'givenName': user['names'][0]['givenName'] if len(user['names']) > 0 else '',
-            'familyName': user['names'][0]['familyName'] if len(user['names']) > 0 else ''
+            'givenName': user['names'][0]['givenName'] if len(user.get('names', [])) > 0 else '',
+            'familyName': user['names'][0]['familyName'] if len(user.get('names', [])) > 0 else ''
         },
         'content': comment_node['contentQtextDocument']['legacyJson'] if comment_node['contentQtextDocument'] is not None else '' 
     }
