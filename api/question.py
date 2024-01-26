@@ -17,14 +17,14 @@ def fetch_question_info_by_qid(session: requests.Session, qid: int):
         }
     }
 
-    while True:
-        response = session.post(
-            'https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery',
-            data=json.dumps(payload), headers=get_quora_header(), cookies=get_quora_cookie()
-        )
+    # while True:
+    response = session.post(
+        'https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery',
+        data=json.dumps(payload), headers=get_quora_header(), cookies=get_quora_cookie()
+    )
 
-        if 'application/json' in response.headers.get('Content-Type', ''):
-            break
+        # if 'application/json' in response.headers.get('Content-Type', ''):
+        #     break
 
     contentObject = response.json()['data']['contentObject']
 

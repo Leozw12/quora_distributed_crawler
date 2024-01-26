@@ -45,7 +45,7 @@ def fetch_question_with_answer(self, qid: int) -> None:
         while True:
             response = fetch_answers_by_qid(session, qid, cursor)
 
-            if response.json()['data']['question'] is None:
+            if response.json().get('data', None) is None:
                 time.sleep(1)
                 continue
 
@@ -116,8 +116,8 @@ def extract_answer(answer):
         'content': answer['content'],
         'author': {
             'uid': answer['author']['uid'],
-            'givenName': answer['author']['names'][0]['givenName'] if len(answer['author'].get('names', [])) > 0 else '',
-            'familyName': answer['author']['names'][0]['familyName'] if len(answer['author'].get('names', [])) > 0 else '',
+            'givenName': answer['author']['names'][0]['givenName'] if user and len(answer['author'].get('names', [])) > 0 else '',
+            'familyName': answer['author']['names'][0]['familyName'] if user and len(answer['author'].get('names', [])) > 0 else '',
             'isMachineAnswerBot': answer['author']['isMachineAnswerBot'],
             'profileUrl': answer['author']['profileUrl']
         },
@@ -143,8 +143,8 @@ def extract_comment(comment):
         'author': {
             'uid': user['uid'],
             'profileUrl': user['profileUrl'],
-            'givenName': user['names'][0]['givenName'] if len(user.get('names', [])) > 0 else '',
-            'familyName': user['names'][0]['familyName'] if len(user.get('names', [])) > 0 else ''
+            'givenName': user['names'][0]['givenName'] if user and len(user.get('names', [])) > 0 else '',
+            'familyName': user['names'][0]['familyName'] if user and len(user.get('names', [])) > 0 else ''
         },
         'content': comment_node['contentQtextDocument']['legacyJson'] if comment_node['contentQtextDocument'] is not None else '' 
     }
@@ -156,7 +156,7 @@ def get_all_reply(session, cid: int):
     while True:
         response = fetch_reply_by_comment_id(session, cid, cursor)
 
-        if response.json()['data']['comment'] is None:
+        if response.json().get('data', None) is None:
             time.sleep(1)
             continue
 
@@ -189,7 +189,7 @@ def get_all_comment(session, aid: str):
     while True:
         response = fetch_comments_by_aid(session, aid, cursor)
 
-        if response.json()['data']['node'] is None:
+        if response.json().get('data', None) is None:
             time.sleep(1)
             continue
 
