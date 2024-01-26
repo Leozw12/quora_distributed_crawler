@@ -116,8 +116,8 @@ def extract_answer(answer):
         'content': answer['content'],
         'author': {
             'uid': answer['author']['uid'],
-            'givenName': answer['author']['names'][0]['givenName'] if user and len(answer['author'].get('names', [])) > 0 else '',
-            'familyName': answer['author']['names'][0]['familyName'] if user and len(answer['author'].get('names', [])) > 0 else '',
+            'givenName': answer['author']['names'][0]['givenName'] if len(answer['author'].get('names', [])) > 0 else '',
+            'familyName': answer['author']['names'][0]['familyName'] if len(answer['author'].get('names', [])) > 0 else '',
             'isMachineAnswerBot': answer['author']['isMachineAnswerBot'],
             'profileUrl': answer['author']['profileUrl']
         },
