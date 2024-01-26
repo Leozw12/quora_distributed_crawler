@@ -156,7 +156,7 @@ def get_all_reply(session, cid: int):
     while True:
         response = fetch_reply_by_comment_id(session, cid, cursor)
 
-        if response.json().get('data', None) is None:
+        if response.json().get('data', None) is None or response.json()['data'].get('comment', None) is None:
             time.sleep(1)
             continue
 
@@ -189,7 +189,7 @@ def get_all_comment(session, aid: str):
     while True:
         response = fetch_comments_by_aid(session, aid, cursor)
 
-        if response.json().get('data', None) is None:
+        if response.json().get('data', None) is None or response.json()['data'].get('node', None) is None:
             time.sleep(1)
             continue
 
