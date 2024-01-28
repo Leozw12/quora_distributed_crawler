@@ -1,4 +1,5 @@
 import json
+import time
 import requests
 from utils.common import get_quora_header, get_quora_cookie
 
@@ -17,14 +18,17 @@ def fetch_question_info_by_qid(session: requests.Session, qid: int):
         }
     }
 
-    # while True:
-    response = session.post(
-        'https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery',
-        data=json.dumps(payload), headers=get_quora_header(), cookies=get_quora_cookie()
-    )
+    while True:
+        response = session.post(
+            'https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery',
+            data=json.dumps(payload), headers=get_quora_header(), cookies=get_quora_cookie()
+        )
 
-        # if 'application/json' in response.headers.get('Content-Type', ''):
-        #     break
+        if 'application/json' in response.headers.get('Content-Type', ''):
+            break
+        
+        print('api/question 29 line - response not is json')
+        time.sleep(1)
 
     contentObject = response.json()['data']['contentObject']
 
