@@ -212,7 +212,7 @@ def get_all_comment(session, aid: str):
 
         if response.json().get('data', {}).get('node', {}).get('allCommentsConnection', {}):
             continue_count += 1
-            print(f'tasks/answer 194 line - data/node/allCommentsConnection, count: {continue_count}')
+            print(f'tasks/answer 194 line - data/node/allCommentsConnection, count: {continue_count}, id: {aid}')
             
             if continue_count >= 10:
                 return
