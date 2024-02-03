@@ -50,7 +50,7 @@ def fetch_question_with_answer(self, qid: int) -> None:
             if response.json().get('data', None) is None:
                 continue_count += 1
 
-                print(f'tasks/answer 51 line - data/comment/repliesConnection, count: {continue_count}')
+                print(f'tasks/answer 51 line - count: {continue_count}, id: {qid}')
 
                 if continue_count >= 10:
                     return
@@ -168,10 +168,10 @@ def get_all_reply(session, cid: int):
     while True:
         response = fetch_reply_by_comment_id(session, cid, cursor)
 
-        if response.json().get('data', {}).get('comment', {}).get('repliesConnection', {}):
+        if not response.json().get('data', {}).get('comment', {}).get('repliesConnection', {}):
             continue_count += 1
 
-            print(f'tasks/answer 160 line - data/comment/repliesConnection, count: {continue_count}')
+            print(f'tasks/answer 160 line - data/comment/repliesConnection, count: {continue_count}, id: {cid}')
 
             if continue_count >= 10:
                 return
@@ -210,7 +210,7 @@ def get_all_comment(session, aid: str):
     while True:
         response = fetch_comments_by_aid(session, aid, cursor)
 
-        if response.json().get('data', {}).get('node', {}).get('allCommentsConnection', {}):
+        if not response.json().get('data', {}).get('node', {}).get('allCommentsConnection', {}):
             continue_count += 1
             print(f'tasks/answer 194 line - data/node/allCommentsConnection, count: {continue_count}, id: {aid}')
             
