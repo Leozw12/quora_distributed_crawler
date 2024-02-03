@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  fastapi-app:
+    image: python:latest
+    ports:
+      - "65534:65534"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: /bin/sh -c "pip install -r requirements.txt && cd server && python main.py"
