@@ -18,6 +18,8 @@ def fetch_question_info_by_qid(session: requests.Session, qid: int):
         }
     }
 
+    continue_count = 0
+
     while True:
         response = session.post(
             'https://www.quora.com/graphql/gql_para_POST?q=ContentLogMainQuery',
@@ -27,7 +29,8 @@ def fetch_question_info_by_qid(session: requests.Session, qid: int):
         if 'application/json' in response.headers.get('Content-Type', ''):
             break
         
-        print('api/question 29 line - response not is json')
+        continue_count += 1
+        print(f'api/question 29 line - response not is json, count:{continue_count}')
         time.sleep(1)
 
     contentObject = response.json()['data']['contentObject']
